@@ -492,7 +492,7 @@ def render_pdf_preview(pdf_bytes: bytes, max_pages: int = 3):
             st.markdown('<div class="cp-card cp-card-static" style="padding:0.6rem;">', unsafe_allow_html=True)
             for i in range(pages_to_show):
                 img = pdf.pages[i].to_image(resolution=150)
-                st.image(img.original, use_container_width=True)
+                st.image(img.original, use_column_width=True)
                 if i < pages_to_show - 1:
                     st.markdown(f'<div style="height:1px;background:{BORDER};margin:0.6rem 0;"></div>', unsafe_allow_html=True)
             st.markdown('</div>', unsafe_allow_html=True)
