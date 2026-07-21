@@ -498,5 +498,7 @@ def render_pdf_preview(pdf_bytes: bytes, max_pages: int = 3):
             st.markdown('</div>', unsafe_allow_html=True)
             if page_count > max_pages:
                 st.caption(f"Showing {max_pages} of {page_count} pages.")
-    except Exception:
+    except Exception as e:
         st.markdown(f'<div class="cp-card cp-card-static" style="text-align:center;padding:2rem;color:{TEXT_MUTED};">Preview unavailable for this file.</div>', unsafe_allow_html=True)
+        with st.expander("Why?"):
+            st.caption(f"{type(e).__name__}: {e}")
