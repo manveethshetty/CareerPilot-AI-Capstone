@@ -9,7 +9,7 @@
 [![Agentic AI](https://img.shields.io/badge/Architecture-Planner_%E2%86%92_Executor-0EA5E9)](#architecture)
 [![License: MIT](https://img.shields.io/badge/License-MIT-8A93B8)](#license)
 
-**Live demo:** _add your Streamlit Cloud link here_
+**Live demo:** https://careerpilot-ai-mj.streamlit.app/
 **Repo:** [github.com/manveethshetty/CareerPilot-AI-Capstone](https://github.com/manveethshetty/CareerPilot-AI-Capstone)
 
 ![CareerPilot AI Dashboard](screenshots/dashboard.png)
