@@ -20,7 +20,6 @@ Typography: Inter only, weight carries hierarchy (Linear/Stripe move).
 No neon, no glassmorphism, no glow shadows. Borders + whitespace carry
 structure instead of color intensity.
 """
-import base64
 import streamlit as st
 import streamlit.components.v1 as components
 from utils.icons import icon
@@ -478,12 +477,26 @@ def render_empty_state(message: str, icon_name: str = "sparkles"):
     """, unsafe_allow_html=True)
 
 
-def render_pdf_preview(pdf_bytes: bytes, height: int = 640):
-    b64 = base64.b64encode(pdf_bytes).decode("utf-8")
-    st.markdown(f"""
-    <div class="cp-card cp-card-static" style="padding:0.5rem;">
-        <iframe src="data:application/pdf;base64,{b64}" width="100%" height="{height}"
-                style="border:none;border-radius:10px;"></iframe>
-    </div>
-    """, unsafe_allow_html=True)
-    st.caption("PDF preview uses your browser's built-in viewer — may not render in browsers without native PDF support.")
+def render_pdf_preview(pdf_bytes: bytes, max_pages: int = 3):
+    """Renders PDF pages as images via pdfplumber (pure-Python, no system
+    dependencies like Poppler/ImageMagick needed — works on Streamlit
+    Cloud as-is). Replaces an earlier data-URI iframe approach that
+    browsers like Edge block by default for security reasons."""
+    import io
+    import pdfplumber
+
+    try:
+        with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
+            page_count = len(pdf.pages)
+            pages_to_show = min(page_count, max_pages)
+            st.markdown('<div class="cp-card cp-card-static" style="padding:0.6rem;">', unsafe_allow_html=True)
+            for i in range(pages_to_show):
+                img = pdf.pages[i].to_image(resolution=150)
+                st.image(img.original, use_container_width=True)
+                if i < pages_to_show - 1:
+                    st.markdown(f'<div style="height:1px;background:{BORDER};margin:0.6rem 0;"></div>', unsafe_allow_html=True)
+            st.markdown('</div>', unsafe_allow_html=True)
+            if page_count > max_pages:
+                st.caption(f"Showing {max_pages} of {page_count} pages.")
+    except Exception:
+        st.markdown(f'<div class="cp-card cp-card-static" style="text-align:center;padding:2rem;color:{TEXT_MUTED};">Preview unavailable for this file.</div>', unsafe_allow_html=True)
