@@ -9,7 +9,7 @@
 [![Agentic AI](https://img.shields.io/badge/Architecture-Planner_%E2%86%92_Executor-0EA5E9)](#architecture)
 [![License: MIT](https://img.shields.io/badge/License-MIT-8A93B8)](#license)
 
-**Live demo:**https://careerpilot-ai-mj.streamlit.app/
+**Live demo:** _add your Streamlit Cloud link here_
 **Repo:** [github.com/manveethshetty/CareerPilot-AI-Capstone](https://github.com/manveethshetty/CareerPilot-AI-Capstone)
 
 ![CareerPilot AI Dashboard](screenshots/dashboard.png)
@@ -71,7 +71,12 @@ CareerPilot AI was built to be a genuine small agentic system instead: a **Plann
 | ![Dashboard](screenshots/dashboard.png) | ![Resume Analysis](screenshots/resume-analysis.png) |
 | Live KPI cards with real trend deltas, resume workspace, and a pipeline visualization with real measured per-stage timing | Split view — original PDF alongside an LLM-generated executive summary and strengths |
 
+| Skill Intelligence | Project Recommendations |
+|---|---|
+| ![Skill Intelligence](screenshots/skill-intelligence.png) | ![Project Recommendations](screenshots/project-recommendations.png) |
+| Current / missing / recommended skill chips with a real coverage donut computed from the actual gap | Premium project cards with difficulty, tech stack, resume impact, and learning outcome — all LLM-generated and grounded in retrieved resume context |
 
+_ATS Optimization and Learning Roadmap pages exist and function identically to the above — screenshots to be added._
 
 ## Features
 
@@ -133,10 +138,6 @@ pip install -r requirements.txt
 cp .env.example .env            # then add your GROQ_API_KEY
 streamlit run app.py
 ```
-
-Get a free Groq API key at [console.groq.com](https://console.groq.com).
-
-
 
 ## Design decisions worth knowing
 
